@@ -126,16 +126,6 @@ var VolumeTypeToStepSize = map[VolumeType]int{
 	SSDEnterpriseVolumeType:        10,
 }
 
-var VolumeTypeToMinSize = map[VolumeType]int{
-	HighPerformanceVolumeType:      10,
-	HighCapacityVolumeType:         100,
-	SuperHighPerformanceVolumeType: 10,
-	NeonSANVolumeType:              100,
-	NeonSANHDDVolumeType:           100,
-	StandardVolumeType:             10,
-	SSDEnterpriseVolumeType:        10,
-}
-
 var VolumeTypeToMaxSize = map[VolumeType]int{
 	HighPerformanceVolumeType:      2000,
 	HighCapacityVolumeType:         5000,

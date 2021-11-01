@@ -29,7 +29,6 @@ import (
 const (
 	StorageClassTypeName     = "type"
 	StorageClassMaxSizeName  = "maxSize"
-	StorageClassMinSizeName  = "minSize"
 	StorageClassStepSizeName = "stepSize"
 	StorageClassFsTypeName   = "fsType"
 	StorageClassReplicaName  = "replica"
@@ -39,7 +38,6 @@ const (
 type QingStorageClass struct {
 	diskType VolumeType
 	maxSize  int
-	minSize  int
 	stepSize int
 	fsType   string
 	replica  int
@@ -54,7 +52,6 @@ func NewDefaultQingStorageClassFromType(diskType VolumeType) *QingStorageClass {
 	return &QingStorageClass{
 		diskType: diskType,
 		maxSize:  VolumeTypeToMaxSize[diskType],
-		minSize:  VolumeTypeToMinSize[diskType],
 		stepSize: VolumeTypeToStepSize[diskType],
 		fsType:   common.DefaultFileSystem,
 		replica:  DefaultDiskReplicaType,
@@ -64,7 +61,7 @@ func NewDefaultQingStorageClassFromType(diskType VolumeType) *QingStorageClass {
 // NewQingStorageClassFromMap create qingStorageClass object from map
 func NewQingStorageClassFromMap(opt map[string]string, topology *Topology) (*QingStorageClass, error) {
 	volType := -1
-	maxSize, minSize, stepSize := -1, -1, -1
+	maxSize, stepSize := -1, -1
 	fsType := ""
 	replica := -1
 	var tags []string
@@ -84,13 +81,6 @@ func NewQingStorageClassFromMap(opt map[string]string, topology *Topology) (*Qin
 				return nil, err
 			}
 			maxSize = iv
-		case strings.ToLower(StorageClassMinSizeName):
-			// Convert to integer
-			iv, err := strconv.Atoi(v)
-			if err != nil {
-				return nil, err
-			}
-			minSize = iv
 		case strings.ToLower(StorageClassStepSizeName):
 			// Convert to integer
 			iv, err := strconv.Atoi(v)
@@ -137,8 +127,8 @@ func NewQingStorageClassFromMap(opt map[string]string, topology *Topology) (*Qin
 	}
 	sc := NewDefaultQingStorageClassFromType(t)
 	// For backward compatibility, ignore error
-	if maxSize > 0 && minSize > 0 && stepSize > 0 {
-		_ = sc.setTypeSize(maxSize, minSize, stepSize)
+	if maxSize > 0 && stepSize > 0 {
+		_ = sc.setTypeSize(maxSize, stepSize)
 	}
 	_ = sc.setFsType(fsType)
 	_ = sc.setReplica(replica)
@@ -148,10 +138,6 @@ func NewQingStorageClassFromMap(opt map[string]string, topology *Topology) (*Qin
 
 func (sc QingStorageClass) GetDiskType() VolumeType {
 	return sc.diskType
-}
-
-func (sc QingStorageClass) GetMinSizeByte() int64 {
-	return int64(sc.minSize) * common.Gib
 }
 
 func (sc QingStorageClass) GetMaxSizeByte() int64 {
@@ -189,15 +175,11 @@ func (sc *QingStorageClass) setReplica(repl int) error {
 	return nil
 }
 
-func (sc *QingStorageClass) setTypeSize(maxSize, minSize, stepSize int) error {
-	if maxSize < 0 || minSize <= 0 || stepSize < 0 {
+func (sc *QingStorageClass) setTypeSize(maxSize, stepSize int) error {
+	if maxSize < 0 || stepSize < 0 {
 		return nil
 	}
-	// Ensure volume minSize less than volume maxSize
-	if sc.maxSize < sc.minSize {
-		return fmt.Errorf("max size must greater than or equal to min size")
-	}
-	sc.maxSize, sc.minSize, sc.stepSize = maxSize, minSize, stepSize
+	sc.maxSize, sc.stepSize = maxSize, stepSize
 	return nil
 }
 
@@ -207,9 +189,7 @@ func (sc *QingStorageClass) setTags(tagsStr []string) {
 
 // FormatVolumeSize transfer to proper volume size
 func (sc QingStorageClass) FormatVolumeSizeByte(sizeByte int64) int64 {
-	if sizeByte <= sc.GetMinSizeByte() {
-		return sc.GetMinSizeByte()
-	} else if sizeByte > sc.GetMaxSizeByte() {
+	if sizeByte > sc.GetMaxSizeByte() {
 		return sc.GetMaxSizeByte()
 	}
 	if sizeByte%sc.GetStepSizeByte() != 0 {
@@ -224,7 +204,8 @@ func (sc QingStorageClass) FormatVolumeSizeByte(sizeByte int64) int64 {
 // Required Volume Size
 func (sc QingStorageClass) GetRequiredVolumeSizeByte(capRange *csi.CapacityRange) (int64, error) {
 	if capRange == nil {
-		return int64(sc.minSize) * common.Gib, nil
+		//TODO To be verified
+		return 0 * common.Gib, nil
 	}
 	res := int64(0)
 	if capRange.GetRequiredBytes() > 0 {

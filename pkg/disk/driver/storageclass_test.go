@@ -37,7 +37,6 @@ func TestNewDefaultQingStorageClassFromType(t *testing.T) {
 			sc: &QingStorageClass{
 				diskType: DefaultVolumeType,
 				maxSize:  VolumeTypeToMaxSize[DefaultVolumeType],
-				minSize:  VolumeTypeToMinSize[DefaultVolumeType],
 				stepSize: VolumeTypeToStepSize[DefaultVolumeType],
 				fsType:   common.DefaultFileSystem,
 				replica:  DefaultDiskReplicaType,
@@ -49,7 +48,6 @@ func TestNewDefaultQingStorageClassFromType(t *testing.T) {
 			sc: &QingStorageClass{
 				diskType: HighCapacityVolumeType,
 				maxSize:  VolumeTypeToMaxSize[HighCapacityVolumeType],
-				minSize:  VolumeTypeToMinSize[HighCapacityVolumeType],
 				stepSize: VolumeTypeToStepSize[HighCapacityVolumeType],
 				fsType:   common.DefaultFileSystem,
 				replica:  DefaultDiskReplicaType,
@@ -82,7 +80,6 @@ func TestNewQingStorageClassFromMap(t *testing.T) {
 			opt: map[string]string{
 				StorageClassTypeName:     strconv.Itoa(int(DefaultVolumeType)),
 				StorageClassMaxSizeName:  strconv.Itoa(VolumeTypeToMaxSize[DefaultVolumeType]),
-				StorageClassMinSizeName:  strconv.Itoa(VolumeTypeToMinSize[DefaultVolumeType]),
 				StorageClassStepSizeName: strconv.Itoa(VolumeTypeToStepSize[DefaultVolumeType]),
 				StorageClassFsTypeName:   common.FileSystemExt3,
 				StorageClassReplicaName:  strconv.Itoa(DiskSingleReplicaType),
@@ -90,7 +87,6 @@ func TestNewQingStorageClassFromMap(t *testing.T) {
 			sc: &QingStorageClass{
 				diskType: DefaultVolumeType,
 				maxSize:  VolumeTypeToMaxSize[DefaultVolumeType],
-				minSize:  VolumeTypeToMinSize[DefaultVolumeType],
 				stepSize: VolumeTypeToStepSize[DefaultVolumeType],
 				fsType:   common.FileSystemExt3,
 				replica:  DiskSingleReplicaType,
@@ -105,7 +101,6 @@ func TestNewQingStorageClassFromMap(t *testing.T) {
 			sc: &QingStorageClass{
 				diskType: DefaultVolumeType,
 				maxSize:  VolumeTypeToMaxSize[DefaultVolumeType],
-				minSize:  VolumeTypeToMinSize[DefaultVolumeType],
 				stepSize: VolumeTypeToStepSize[DefaultVolumeType],
 				fsType:   common.FileSystemExt4,
 				replica:  DiskMultiReplicaType,
@@ -117,7 +112,6 @@ func TestNewQingStorageClassFromMap(t *testing.T) {
 			opt: map[string]string{
 				StorageClassTypeName:     "5",
 				StorageClassMaxSizeName:  "23",
-				StorageClassMinSizeName:  "22",
 				StorageClassStepSizeName: "4",
 				StorageClassFsTypeName:   common.FileSystemExt3,
 				StorageClassReplicaName:  strconv.Itoa(DiskSingleReplicaType),
@@ -125,7 +119,6 @@ func TestNewQingStorageClassFromMap(t *testing.T) {
 			sc: &QingStorageClass{
 				diskType: 5,
 				maxSize:  23,
-				minSize:  22,
 				stepSize: 4,
 				fsType:   common.FileSystemExt3,
 				replica:  DiskSingleReplicaType,
@@ -137,7 +130,6 @@ func TestNewQingStorageClassFromMap(t *testing.T) {
 			opt: map[string]string{
 				StorageClassTypeName:     "4",
 				StorageClassMaxSizeName:  "23",
-				StorageClassMinSizeName:  "22",
 				StorageClassStepSizeName: "4",
 				StorageClassFsTypeName:   common.FileSystemExt3,
 				StorageClassReplicaName:  strconv.Itoa(DiskSingleReplicaType),
@@ -150,7 +142,6 @@ func TestNewQingStorageClassFromMap(t *testing.T) {
 			opt: map[string]string{
 				StorageClassTypeName:     strconv.Itoa(int(DefaultVolumeType)),
 				StorageClassMaxSizeName:  strconv.Itoa(VolumeTypeToMaxSize[DefaultVolumeType]),
-				StorageClassMinSizeName:  strconv.Itoa(VolumeTypeToMinSize[DefaultVolumeType]),
 				StorageClassStepSizeName: strconv.Itoa(VolumeTypeToStepSize[DefaultVolumeType]),
 				StorageClassFsTypeName:   common.FileSystemExt3,
 				StorageClassReplicaName:  strconv.Itoa(DiskSingleReplicaType),
@@ -159,7 +150,6 @@ func TestNewQingStorageClassFromMap(t *testing.T) {
 			sc: &QingStorageClass{
 				diskType: DefaultVolumeType,
 				maxSize:  VolumeTypeToMaxSize[DefaultVolumeType],
-				minSize:  VolumeTypeToMinSize[DefaultVolumeType],
 				stepSize: VolumeTypeToStepSize[DefaultVolumeType],
 				fsType:   common.FileSystemExt3,
 				replica:  DiskSingleReplicaType,
@@ -171,7 +161,6 @@ func TestNewQingStorageClassFromMap(t *testing.T) {
 			opt: map[string]string{
 				StorageClassTypeName:     strconv.Itoa(int(DefaultVolumeType)),
 				StorageClassMaxSizeName:  strconv.Itoa(VolumeTypeToMaxSize[DefaultVolumeType]),
-				StorageClassMinSizeName:  strconv.Itoa(VolumeTypeToMinSize[DefaultVolumeType]),
 				StorageClassStepSizeName: strconv.Itoa(VolumeTypeToStepSize[DefaultVolumeType]),
 				StorageClassFsTypeName:   common.FileSystemExt3,
 				StorageClassReplicaName:  strconv.Itoa(DiskSingleReplicaType),
@@ -180,7 +169,6 @@ func TestNewQingStorageClassFromMap(t *testing.T) {
 			sc: &QingStorageClass{
 				diskType: DefaultVolumeType,
 				maxSize:  VolumeTypeToMaxSize[DefaultVolumeType],
-				minSize:  VolumeTypeToMinSize[DefaultVolumeType],
 				stepSize: VolumeTypeToStepSize[DefaultVolumeType],
 				fsType:   common.FileSystemExt3,
 				replica:  DiskSingleReplicaType,
@@ -193,7 +181,6 @@ func TestNewQingStorageClassFromMap(t *testing.T) {
 			opt: map[string]string{
 				StorageClassTypeName:     strconv.Itoa(int(DefaultVolumeType)),
 				StorageClassMaxSizeName:  strconv.Itoa(VolumeTypeToMaxSize[DefaultVolumeType]),
-				StorageClassMinSizeName:  strconv.Itoa(VolumeTypeToMinSize[DefaultVolumeType]),
 				StorageClassStepSizeName: strconv.Itoa(VolumeTypeToStepSize[DefaultVolumeType]),
 				StorageClassFsTypeName:   common.FileSystemExt3,
 				StorageClassReplicaName:  strconv.Itoa(DiskSingleReplicaType),
@@ -202,7 +189,6 @@ func TestNewQingStorageClassFromMap(t *testing.T) {
 			sc: &QingStorageClass{
 				diskType: DefaultVolumeType,
 				maxSize:  VolumeTypeToMaxSize[DefaultVolumeType],
-				minSize:  VolumeTypeToMinSize[DefaultVolumeType],
 				stepSize: VolumeTypeToStepSize[DefaultVolumeType],
 				fsType:   common.FileSystemExt3,
 				replica:  DiskSingleReplicaType,
@@ -215,14 +201,12 @@ func TestNewQingStorageClassFromMap(t *testing.T) {
 			opt: map[string]string{
 				StorageClassTypeName:     strconv.Itoa(int(DefaultVolumeType)),
 				StorageClassMaxSizeName:  strconv.Itoa(VolumeTypeToMaxSize[DefaultVolumeType]),
-				StorageClassMinSizeName:  strconv.Itoa(VolumeTypeToMinSize[DefaultVolumeType]),
 				StorageClassStepSizeName: strconv.Itoa(VolumeTypeToStepSize[DefaultVolumeType]),
 				StorageClassFsTypeName:   common.FileSystemExt3,
 			},
 			sc: &QingStorageClass{
 				diskType: DefaultVolumeType,
 				maxSize:  VolumeTypeToMaxSize[DefaultVolumeType],
-				minSize:  VolumeTypeToMinSize[DefaultVolumeType],
 				stepSize: VolumeTypeToStepSize[DefaultVolumeType],
 				fsType:   common.FileSystemExt3,
 				replica:  DiskMultiReplicaType,
@@ -237,7 +221,6 @@ func TestNewQingStorageClassFromMap(t *testing.T) {
 			sc: &QingStorageClass{
 				diskType: DefaultVolumeType,
 				maxSize:  VolumeTypeToMaxSize[DefaultVolumeType],
-				minSize:  VolumeTypeToMinSize[DefaultVolumeType],
 				stepSize: VolumeTypeToStepSize[DefaultVolumeType],
 				fsType:   common.FileSystemExt3,
 				replica:  DiskMultiReplicaType,
@@ -248,14 +231,12 @@ func TestNewQingStorageClassFromMap(t *testing.T) {
 			name: "without type, with topology",
 			opt: map[string]string{
 				StorageClassMaxSizeName:  strconv.Itoa(VolumeTypeToMaxSize[DefaultVolumeType]),
-				StorageClassMinSizeName:  strconv.Itoa(VolumeTypeToMinSize[DefaultVolumeType]),
 				StorageClassStepSizeName: strconv.Itoa(VolumeTypeToStepSize[DefaultVolumeType]),
 				StorageClassFsTypeName:   common.FileSystemExt3,
 			},
 			sc: &QingStorageClass{
 				diskType: NeonSANVolumeType,
 				maxSize:  VolumeTypeToMaxSize[DefaultVolumeType],
-				minSize:  VolumeTypeToMinSize[DefaultVolumeType],
 				stepSize: VolumeTypeToStepSize[DefaultVolumeType],
 				fsType:   common.FileSystemExt3,
 				replica:  DiskMultiReplicaType,
@@ -267,14 +248,12 @@ func TestNewQingStorageClassFromMap(t *testing.T) {
 			name: "without type, wrong instance type, fallback to default volume type",
 			opt: map[string]string{
 				StorageClassMaxSizeName:  strconv.Itoa(VolumeTypeToMaxSize[DefaultVolumeType]),
-				StorageClassMinSizeName:  strconv.Itoa(VolumeTypeToMinSize[DefaultVolumeType]),
 				StorageClassStepSizeName: strconv.Itoa(VolumeTypeToStepSize[DefaultVolumeType]),
 				StorageClassFsTypeName:   common.FileSystemExt3,
 			},
 			sc: &QingStorageClass{
 				diskType: DefaultVolumeType,
 				maxSize:  VolumeTypeToMaxSize[DefaultVolumeType],
-				minSize:  VolumeTypeToMinSize[DefaultVolumeType],
 				stepSize: VolumeTypeToStepSize[DefaultVolumeType],
 				fsType:   common.FileSystemExt3,
 				replica:  DiskMultiReplicaType,
