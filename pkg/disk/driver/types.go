@@ -116,26 +116,6 @@ var VolumeTypeName = map[VolumeType]string{
 	SSDEnterpriseVolumeType:        "SSDEnterprise",
 }
 
-var VolumeTypeToStepSize = map[VolumeType]int{
-	HighPerformanceVolumeType:      10,
-	HighCapacityVolumeType:         50,
-	SuperHighPerformanceVolumeType: 10,
-	NeonSANVolumeType:              100,
-	NeonSANHDDVolumeType:           100,
-	StandardVolumeType:             10,
-	SSDEnterpriseVolumeType:        10,
-}
-
-var VolumeTypeToMaxSize = map[VolumeType]int{
-	HighPerformanceVolumeType:      2000,
-	HighCapacityVolumeType:         5000,
-	SuperHighPerformanceVolumeType: 2000,
-	NeonSANVolumeType:              50000,
-	NeonSANHDDVolumeType:           50000,
-	StandardVolumeType:             2000,
-	SSDEnterpriseVolumeType:        2000,
-}
-
 type InstanceType int
 
 func (i InstanceType) Int() int {
